@@ -1,0 +1,2 @@
+*.xml text eol=lf
+.idea/* text eol=lf
