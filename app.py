@@ -72,20 +72,19 @@ def random_dish():
     return jsonify(row if row else {})
 
 
-# ③ 获取所有窗口名称
 @app.route("/stalls", methods=["GET"])
 def list_stalls():
     rows = query_db("SELECT DISTINCT stall_name FROM dishes")
     stalls = [row["stall_name"] for row in rows]
-    return jsonify(stalls)
-
+    # 包装成 JSON 对象，不要直接返回数组！
+    return jsonify({"stalls": stalls})
 
 # ④ 获取所有楼层
 @app.route("/floors", methods=["GET"])
 def list_floors():
     rows = query_db("SELECT DISTINCT floor FROM dishes")
     floors = [row["floor"] for row in rows]
-    return jsonify(floors)
+    return jsonify({"floors": floors})  # ✅ 包装成对象
 
 
 if __name__ == "__main__":
